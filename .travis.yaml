@@ -1,0 +1,8 @@
+language: python
+python:
+    - "3.4"
+
+install:
+    - pip install -r requirements/local.txt
+
+script: flake8 ./
