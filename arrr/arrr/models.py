@@ -1,10 +1,13 @@
 from django.contrib.auth.models import User
-from django.db.models import BooleanField, ForeignKey, Model, TextField
-from model_utils.models import TimeFramedModel
+from django.db.models import BooleanField, ForeignKey, TextField, CharField
+
+from autoslug import AutoSlugField
+from model_utils.models import TimeFramedModel, TimeStampedModel
 
 
-class Room(Model):
-    name = TextField(unique=True)
+class Room(TimeStampedModel):
+    slug = AutoSlugField(populate_from="name")
+    name = CharField(unique=True, max_length=50)
     description = TextField(blank=True)
     creator = ForeignKey(User, related_name='created_rooms')
 
