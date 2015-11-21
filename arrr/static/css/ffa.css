@@ -1,0 +1,224 @@
+/*
+ * Source: https://github.com/joshmedeski/foundation-font-awesome-buttons
+ */
+
+.fa-spin, button.ffab-before.ffab-spin:before,
+button.ffab-after.ffab-spin:before,
+.button.ffab-before.ffab-spin:before,
+.button.ffab-after.ffab-spin:before {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear; }
+
+.fa-pulse, button.ffab-before.ffab-pulse:before,
+button.ffab-after.ffab-pulse:before,
+.button.ffab-before.ffab-pulse:before,
+.button.ffab-after.ffab-pulse:before {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8); }
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+
+.fa-rotate-90, button.ffab-before.ffab-rotate-90:before,
+button.ffab-after.ffab-rotate-90:before,
+.button.ffab-before.ffab-rotate-90:before,
+.button.ffab-after.ffab-rotate-90:before {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+.fa-rotate-180, button.ffab-before.ffab-rotate-180:before,
+button.ffab-after.ffab-rotate-180:before,
+.button.ffab-before.ffab-rotate-180:before,
+.button.ffab-after.ffab-rotate-180:before {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.fa-rotate-270, button.ffab-before.ffab-rotate-270:before,
+button.ffab-after.ffab-rotate-270:before,
+.button.ffab-before.ffab-rotate-270:before,
+.button.ffab-after.ffab-rotate-270:before {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg); }
+
+.fa-flip-horizontal, button.ffab-before.ffab-flip-horizontal:before,
+button.ffab-after.ffab-flip-horizontal:before,
+.button.ffab-before.ffab-flip-horizontal:before,
+.button.ffab-after.ffab-flip-horizontal:before {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1); }
+
+.fa-flip-vertical, button.ffab-before.ffab-flip-vertical:before,
+button.ffab-after.ffab-flip-vertical:before,
+.button.ffab-before.ffab-flip-vertical:before,
+.button.ffab-after.ffab-flip-vertical:before {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1); }
+
+:root .fa-rotate-90,
+:root button.ffab-before.ffab-rotate-90:before,
+:root button.ffab-after.ffab-rotate-90:before,
+:root .button.ffab-before.ffab-rotate-90:before,
+:root .button.ffab-after.ffab-rotate-90:before,
+:root .fa-rotate-180,
+:root button.ffab-before.ffab-rotate-180:before,
+:root button.ffab-after.ffab-rotate-180:before,
+:root .button.ffab-before.ffab-rotate-180:before,
+:root .button.ffab-after.ffab-rotate-180:before,
+:root .fa-rotate-270,
+:root button.ffab-before.ffab-rotate-270:before,
+:root button.ffab-after.ffab-rotate-270:before,
+:root .button.ffab-before.ffab-rotate-270:before,
+:root .button.ffab-after.ffab-rotate-270:before,
+:root .fa-flip-horizontal,
+:root button.ffab-before.ffab-flip-horizontal:before,
+:root button.ffab-after.ffab-flip-horizontal:before,
+:root .button.ffab-before.ffab-flip-horizontal:before,
+:root .button.ffab-after.ffab-flip-horizontal:before,
+:root .fa-flip-vertical, :root button.ffab-before.ffab-flip-vertical:before, :root button.ffab-after.ffab-flip-vertical:before, :root .button.ffab-before.ffab-flip-vertical:before, :root .button.ffab-after.ffab-flip-vertical:before {
+  -webkit-filter: none;
+          filter: none; }
+button,
+.button {
+  overflow: hidden;
+  position: relative; }
+  button.ffab-before:before,
+  button.ffab-after:before,
+  .button.ffab-before:before,
+  .button.ffab-after:before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.4;
+    position: absolute;
+    z-index: 2; }
+  button.ffab-before:after,
+  button.ffab-after:after,
+  .button.ffab-before:after,
+  .button.ffab-after:after {
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    height: 200%;
+    position: absolute;
+    top: 0;
+    transition: all 0.3s;
+    z-index: 1; }
+  button.ffab-before:after,
+  button.ffab-after:after,
+  .button.ffab-before:after,
+  .button.ffab-after:after {
+    width: 4.9375rem; }
+  button.ffab-before.tiny:after,
+  button.ffab-after.tiny:after,
+  .button.ffab-before.tiny:after,
+  .button.ffab-after.tiny:after {
+    width: 3.5rem; }
+  button.ffab-before.small:after,
+  button.ffab-after.small:after,
+  .button.ffab-before.small:after,
+  .button.ffab-after.small:after {
+    width: 4.375rem; }
+  button.ffab-before.large:after,
+  button.ffab-after.large:after,
+  .button.ffab-before.large:after,
+  .button.ffab-after.large:after {
+    width: 5.5625rem; }
+  button.ffab-before:hover:not(.disabled):after,
+  button.ffab-after:hover:not(.disabled):after,
+  .button.ffab-before:hover:not(.disabled):after,
+  .button.ffab-after:hover:not(.disabled):after {
+    -webkit-transform: rotate(0deg) !important;
+        -ms-transform: rotate(0deg) !important;
+            transform: rotate(0deg) !important;
+    width: 0% !important; }
+  button.ffab-before,
+  .button.ffab-before {
+    padding-left: 5.9375rem; }
+    button.ffab-before.tiny,
+    .button.ffab-before.tiny {
+      padding-left: 4.125rem; }
+    button.ffab-before.small,
+    .button.ffab-before.small {
+      padding-left: 5.25rem; }
+    button.ffab-before.large,
+    .button.ffab-before.large {
+      padding-left: 6.6875rem; }
+    button.ffab-before:before,
+    .button.ffab-before:before {
+      left: 2rem; }
+    button.ffab-before.tiny:before,
+    .button.ffab-before.tiny:before {
+      left: 1.25rem; }
+    button.ffab-before.small:before,
+    .button.ffab-before.small:before {
+      left: 1.75rem; }
+    button.ffab-before.large:before,
+    .button.ffab-before.large:before {
+      left: 2.25rem; }
+    button.ffab-before:after,
+    .button.ffab-before:after {
+      left: 0;
+      -webkit-transform: rotate(-15deg);
+          -ms-transform: rotate(-15deg);
+              transform: rotate(-15deg);
+      -webkit-transform-origin: left;
+          -ms-transform-origin: left;
+              transform-origin: left; }
+  button.ffab-after,
+  .button.ffab-after {
+    padding-right: 5.9375rem; }
+    button.ffab-after.tiny,
+    .button.ffab-after.tiny {
+      padding-right: 4.125rem; }
+    button.ffab-after.small,
+    .button.ffab-after.small {
+      padding-right: 5.25rem; }
+    button.ffab-after.large,
+    .button.ffab-after.large {
+      padding-right: 6.6875rem; }
+    button.ffab-after:before,
+    .button.ffab-after:before {
+      right: 2rem; }
+    button.ffab-after.tiny:before,
+    .button.ffab-after.tiny:before {
+      right: 1.25rem; }
+    button.ffab-after.small:before,
+    .button.ffab-after.small:before {
+      right: 1.75rem; }
+    button.ffab-after.large:before,
+    .button.ffab-after.large:before {
+      right: 2.25rem; }
+    button.ffab-after:after,
+    .button.ffab-after:after {
+      right: 0;
+      -webkit-transform: rotate(15deg);
+          -ms-transform: rotate(15deg);
+              transform: rotate(15deg);
+      -webkit-transform-origin: right;
+          -ms-transform-origin: right;
+              transform-origin: right; }

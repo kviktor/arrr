@@ -1,1 +1,69 @@
-/*! project specific CSS goes here. */
+/* for form hints */
+.hint {
+  display: block;
+  margin-bottom: 10px;
+  color: #737373;
+  font-size: 0.8rem;
+}
+
+form .textInput, form small.error, form .textarea {
+  margin-bottom: 1px !important; 
+}
+/* ------------ */
+
+/* base desing */
+.inner-wrap {
+  width: auto; }
+
+.move-right .inner-wrap {
+  -ms-transform: none;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+  margin-left: 114px; }
+
+.left-off-canvas-menu {
+  -ms-transform: none;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+  position: fixed;
+  width: 0;
+  height: 100%; }
+
+.move-right .left-off-canvas-menu {
+  width: 114px; }
+
+.move-right .exit-off-canvas {
+  display: none; }
+
+.left-off-canvas-toggle {
+  display: none;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 3rem;
+  color: #333;
+  transition: all .25s ease-in-out; }
+  .left-off-canvas-toggle:focus {
+    color: #333; }
+  .left-off-canvas-toggle:hover {
+    color: #8c8c8c;
+    transition: all .25s ease-in-out; }
+
+.five-up a.item {  
+  min-width: 114px;
+}
+
+.five-up a label {
+  font-size: 0.82rem;
+  margin-top: 5px;
+}
+
+/* css for site */
+.content {
+  padding: 20px 50px;
+}

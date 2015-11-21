@@ -1,10 +1,13 @@
-{% load staticfiles %}<!DOCTYPE html>
-<html lang="en">
+{% load staticfiles %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta name="description" content="{% block description %}{% endblock %}" />
-    <meta name="keywords" content="{% block keywords %}{% endblock %}" />
-    <meta name="viewport" content="{% block viewport %}width=device-width"{% endblock %}>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>{% block title %}arrr{% endblock title %}</title>
@@ -17,26 +20,55 @@
     <link rel="icon" type="image/gif" href="{% static 'img/favicon.gif' %}">
 
     {% block css %}
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+    <link href="{% static 'css/foundation.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/ffa.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     {% endblock %}
 
   </head>
 
   <body>
-    <div class="container">
+    <div class="off-canvas-wrap move-right" data-offcanvas>
+      <div class="inner-wrap">
+        <a class="left-off-canvas-toggle" href="#"><i class="fa fa-list"></i></a>
+        <!-- Off Canvas Menu -->
+        <aside class="left-off-canvas-menu text-center">
+          <div class="icon-bar vertical five-up" style="font-size: 8px; ">
+            <a class="item">
+              <i class="fa fa-home"></i>
+              <label>{% trans "Home" %}</label>
+            </a>
+            <a class="item">
+              <i class="fa fa-map-o"></i>
+              <label>{% trans "Rooms" %}</label>
+            </a>
+            <a class="item">
+              <i class="fa fa-calendar-check-o"></i>
+              <label>{% trans "Reservations" %}</label>
+            </a>
+            <a class="item" style="position: absolute; bottom: 0;">
+              <i class="fa fa-sign-out"></i>
+              <label>{% trans "Logout" %}</label>
+            </a>
+          </div>
+        </aside>
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+        <header class="row">
+          <h1 class="text-center">ARRR - Almighty Room ReserveR</h1>
+        </header>
 
-    </div> <!-- /container -->
+        <div class="content">
+          {% block content %}{% endblock %}
+        </div>
+        <!-- close the off-canvas menu -->
 
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+        <a class="exit-off-canvas"></a>
+      </div>
+    </div>
     {% block javascript %}
-      <script src="{% static 'js/scripts.js' %}"></script>
+    <!--<script src="{% static 'js/scripts.js' %}"></script>-->
     {% endblock javascript %}
   </body>
 </html>
