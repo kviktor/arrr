@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %n
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% for room in object_list %}
+  <a href="{% url "room-detail" slug=room.slug %}">
+    {{ room.name }}
+  </a>
+  <br />
+{% endfor %}
+
+{% endblock %}

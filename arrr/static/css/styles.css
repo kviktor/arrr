@@ -9,6 +9,11 @@
 form .textInput, form small.error, form .textarea {
   margin-bottom: 1px !important; 
 }
+
+.holder {
+  margin-bottom: 1rem;
+}
+
 /* ------------ */
 
 /* base desing */

@@ -27,6 +27,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+)
+
 ROOT_URLCONF = 'arrr.urls'
 
 
@@ -39,7 +45,10 @@ DJANGO_APPS = (
     'django.contrib.staticfiles'
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'crispy_forms',
+    'crispy_forms_foundation',
+)
 
 LOCAL_APPS = ("arrr", )
 
@@ -89,3 +98,8 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     join(SITE_ROOT, 'templates'),
 )
+
+# Add 'foundation-5' layout pack
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5')
+# Default layout to use with "crispy_forms"
+CRISPY_TEMPLATE_PACK = 'foundation-5'
