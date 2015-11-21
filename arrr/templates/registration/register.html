@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="login-box">
+  <form method="POST" action="">
+    {% csrf_token %}
+
+    {{ form.username|as_crispy_field }}
+    {{ form.email|as_crispy_field }}
+    {{ form.password1|as_crispy_field }}
+    {{ form.password2|as_crispy_field }}
+    <button type="submit" class="button success right ffab-before fa-user">
+      {% trans "Register" %}
+    </button>
+  </form>
+  <div style="clear: both;"></div>
+</div>
+{% endblock %}

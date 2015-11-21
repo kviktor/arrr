@@ -72,3 +72,10 @@ form .textInput, form small.error, form .textarea {
 .content {
   padding: 20px 50px;
 }
+
+.login-box {
+  background: #fafafa;
+  padding: 25px 30px 10px 30px;
+  max-width: 450px;
+  margin: auto;
+}

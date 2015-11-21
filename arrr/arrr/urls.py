@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from .views import (
     home,
     RoomCreateView, RoomDetailView, RoomListView, RoomEditView, RoomDeleteView,
+    UserRegisterView,
 )
 
 urlpatterns = patterns(
@@ -23,4 +24,7 @@ urlpatterns = patterns(
         RoomEditView.as_view(), name="room-edit"),
     url(r'^room/(?P<slug>[A-Za-z0-9\-]+)/delete/$',
         RoomDeleteView.as_view(), name="room-delete"),
+    url('^register/$', UserRegisterView.as_view(), name="register"),
+    url('^', include('django.contrib.auth.urls')),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

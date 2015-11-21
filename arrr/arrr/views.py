@@ -1,4 +1,8 @@
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -9,7 +13,7 @@ from braces.views import LoginRequiredMixin
 from braces.views import StaffuserRequiredMixin
 
 from .models import Room
-from .forms import RoomForm
+from .forms import RoomForm, UserRegisterForm
 
 
 def home(request):
@@ -55,3 +59,13 @@ class RoomDeleteView(LoginRequiredMixin, StaffuserRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse("room-list")
+
+
+class UserRegisterView(SuccessMessageMixin, CreateView):
+    model = User
+    form_class = UserRegisterForm
+    template_name = "registration/register.html"
+    success_message = _("Registration successful, you can log in now.")
+
+    def get_success_url(self):
+        return reverse("home")
