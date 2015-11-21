@@ -79,3 +79,19 @@ form .textInput, form small.error, form .textarea {
   max-width: 450px;
   margin: auto;
 }
+
+#room-list-table {
+  width: 100%;
+}
+
+#room-list-table thead th {
+  text-align: center;
+}
+
+#room-list-table tbody tr td:last-child {
+  width: 1px;
+}
+
+#room-list-table .button {
+  margin: 0;
+}
