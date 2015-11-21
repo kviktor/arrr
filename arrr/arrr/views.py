@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -17,7 +16,7 @@ from .forms import RoomForm, UserRegisterForm
 
 
 def home(request):
-    return render(request, "base.html")
+    return render(request, "home.html")
 
 
 class RoomListView(ListView):

@@ -68,6 +68,11 @@ form .textInput, form small.error, form .textarea {
   margin-top: 5px;
 }
 
+.five-up a.item.bottom {
+  position: absolute;
+  bottom: 0;
+}
+
 /* css for site */
 .content {
   padding: 20px 50px;
