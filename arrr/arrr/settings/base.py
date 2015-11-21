@@ -1,3 +1,5 @@
+# flake8: noqa
+
 from sys import path
 from os.path import join, abspath, dirname
 
