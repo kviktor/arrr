@@ -1,18 +1,47 @@
 {% extends "base.html" %}
-{% load i18n %n
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 
+{% if request.user.is_staff %}
+  <h3>
+    Pending reservations
+  </h3>
 
-<h2>
+  <ul class="large-block-grid-2">
+    {% for p in pending %}
+      <li class="approve-box" style="position: relative;">
+        <form action="{% url "reservation.approve" pk=p.pk %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="button alert tiny ffab-before fa-times" name="reject">
+            Reject
+          </button>
+          <button type="submit" class="button success tiny ffab-before fa-check" name="approve">
+            Approve
+          </button>
+        </form>
+        <label>Title</label>
+        <span class="r-text">{{ p.title }}</span>
+        <label>User</label>
+        <span class="r-text">{{ p.reserver }}</span>
+        <label>Is public?</label>
+        <span class="r-text">{{ p.title }}</span>
+        <div style="clear: both;"></div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+<h3>
   {% if request.user.is_staff %}
-    <a class="button success small ffab-before fa-plus right" href="{% url "room.create" %}" style="margin-top: 8px;">
+    <a class="button success small ffab-before fa-plus right" href="{% url "reservation.create" %}" style="margin-top: 8px;">
       Create reservation
     </a>
   {% endif %}
   Reservations
-</h2>
+</h3>
 
 <table id="room-list-table">
   <thead>
@@ -23,7 +52,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for r in object_list %}
+    {% for r in approved %}
       <tr>
         <td>
           {{ r.title }}
@@ -37,6 +66,10 @@
           </a>
         </td>
       </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No reservations</td>
+        </tr>
     {% endfor %}
   </tbody>
 </table>

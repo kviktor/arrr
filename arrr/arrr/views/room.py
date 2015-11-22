@@ -44,9 +44,9 @@ class RoomEditView(LoginRequiredMixin, StaffuserRequiredMixin, UpdateView):
 
 class RoomDeleteView(LoginRequiredMixin, StaffuserRequiredMixin, DeleteView):
     model = Room
-    template_name = "base/delete.html"
+    template_name = "base-delete.html"
     slug_field = "slug"
     slug_url_kwars = "slug"
 
     def get_success_url(self):
-        return reverse("room/list")
+        return reverse("room.list")

@@ -10,7 +10,7 @@ from .views import (
     RoomCreateView, RoomDetailView, RoomListView, RoomEditView, RoomDeleteView,
     UserRegisterView,
     ReservationCreateView, ReservationDetailView, ReservationListView,
-    ReservationEditView, ReservationDeleteView,
+    ReservationEditView, ReservationDeleteView, approve_reservation
 )
 
 urlpatterns = patterns(
@@ -37,6 +37,8 @@ urlpatterns = patterns(
         ReservationEditView.as_view(), name="reservation.edit"),
     url(r'^reservation/(?P<pk>\d+)/delete/$',
         ReservationDeleteView.as_view(), name="reservation.delete"),
+    url(r'^reservation/(?P<pk>\d+)/approve/$',
+        approve_reservation, name="reservation.approve"),
 
     url('^register/$', UserRegisterView.as_view(), name="register"),
     url('^', include('django.contrib.auth.urls')),

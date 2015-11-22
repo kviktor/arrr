@@ -7,7 +7,7 @@
 }
 
 form .textInput, form small.error, form .textarea {
-  margin-bottom: 1px !important; 
+  margin-bottom: 1px !important;
 }
 
 .holder {
@@ -59,7 +59,7 @@ form .textInput, form small.error, form .textarea {
     color: #8c8c8c;
     transition: all .25s ease-in-out; }
 
-.five-up a.item {  
+.five-up a.item {
   min-width: 114px;
 }
 
@@ -99,4 +99,26 @@ form .textInput, form small.error, form .textarea {
 
 #room-list-table .button {
   margin: 0;
+}
+
+.approve-box label {
+  font-weight: bold;
+}
+
+.approve-box .r-text {
+  font-size: 0.9rem;
+}
+
+.approve-box {
+  background: #fafafa;
+  margin: 15px 15px;
+  padding: 10px 20px !important;
+  max-width: 500px;
+  display: block;
+}
+
+.approve-box form{
+  position: absolute;
+  bottom: 0px;
+  right: 20px;
 }
