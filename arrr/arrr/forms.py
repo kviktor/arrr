@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm, EmailField
+from django.forms import ModelForm, EmailField, DateTimeField
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Room, Reservation
@@ -21,6 +21,9 @@ class UserRegisterForm(UserCreationForm):
 
 
 class ReservationForm(ModelForm):
+    start = DateTimeField()
+    end = DateTimeField()
+
     class Meta:
         model = Reservation
-        fields = ("title", "room", "is_public", )
+        fields = ("title", "room", "start", "end", "is_public", )

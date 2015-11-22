@@ -78,7 +78,8 @@ TIME_ZONE = 'UTC'  # 'Europe/London'
 
 USE_I18N = True
 
-USE_L10N = True
+# this is stronger than DATETIME_INPUT_FORMATS
+USE_L10N = False
 
 USE_TZ = True
 
@@ -105,3 +106,7 @@ TEMPLATE_DIRS = (
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5')
 # Default layout to use with "crispy_forms"
 CRISPY_TEMPLATE_PACK = 'foundation-5'
+
+DATETIME_INPUT_FORMATS = (
+    "%Y-%m-%d %H:%M",
+)

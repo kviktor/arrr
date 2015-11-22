@@ -6,7 +6,7 @@
   font-size: 0.8rem;
 }
 
-form .textInput, form small.error, form .textarea {
+form .textInput, form small.error, form .textarea, form .checkboxinput {
   margin-bottom: 1px !important;
 }
 
