@@ -12,6 +12,9 @@ class Room(TimeStampedModel):
     description = TextField(blank=True)
     creator = ForeignKey(User, related_name='created_rooms')
 
+    def __str__(self):
+        return self.name
+
     def get_absolute_url(self):
         return reverse("room-detail", kwargs={'slug': self.slug})
 
@@ -21,3 +24,6 @@ class Reservation(TimeFramedModel):
     is_public = BooleanField(default=False)
     room = ForeignKey(Room)
     reserver = ForeignKey(User, related_name='reservations')
+
+    def get_absolute_url(self):
+        return reverse("reservation-detail", kwargs={'pk': self.pk})

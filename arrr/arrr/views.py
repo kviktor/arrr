@@ -11,8 +11,8 @@ from django.views.generic import (
 from braces.views import LoginRequiredMixin
 from braces.views import StaffuserRequiredMixin
 
-from .models import Room
-from .forms import RoomForm, UserRegisterForm
+from .models import Room, Reservation
+from .forms import RoomForm, UserRegisterForm, ReservationForm
 
 
 def home(request):
@@ -68,3 +68,38 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
 
     def get_success_url(self):
         return reverse("home")
+
+
+class ReservationListView(ListView):
+    model = Reservation
+    template_name = "reservation-list.html"
+
+
+class ReservationCreateView(LoginRequiredMixin, CreateView):
+    model = Reservation
+    form_class = ReservationForm
+    template_name = "reservation-create.html"
+
+    def form_valid(self, form):
+        room = form.save(commit=False)
+        room.reserver = self.request.user
+        return super().form_valid(form)
+
+
+class ReservationDetailView(DetailView):
+    model = Reservation
+    template_name = "reservation-detail.html"
+
+
+class ReservationEditView(LoginRequiredMixin, UpdateView):
+    model = Reservation
+    form_class = ReservationForm
+    template_name = "reservation-edit.html"
+
+
+class ReservationDeleteView(LoginRequiredMixin, DeleteView):
+    model = Reservation
+    template_name = "base-delete.html"
+
+    def get_success_url(self):
+        return reverse("reservation-list")

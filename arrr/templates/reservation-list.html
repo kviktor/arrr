@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load i18n %n
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<h2>
+  {% if request.user.is_staff %}
+    <a class="button success small ffab-before fa-plus right" href="{% url "room-create" %}" style="margin-top: 8px;">
+      Create reservation
+    </a>
+  {% endif %}
+  Reservations
+</h2>
+
+<table id="room-list-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in object_list %}
+      <tr>
+        <td>
+          {{ r.title }}
+        </td>
+        <td>
+          {{ room.description|default:"-" }}
+        </td>
+        <td>
+          <a class="button tiny secondary ffab-after fa-eye" href="{% url "reservation-detail" pk=r.pk %}">
+            view
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

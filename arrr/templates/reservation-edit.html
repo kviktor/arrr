@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %n
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="POST" action="">
+  {% csrf_token %}
+
+{{ form.title|as_crispy_field }}
+{{ form.room|as_crispy_field }}
+{{ form.is_public|as_crispy_field }}
+
+<button type="submit" class="button success small ffab-before fa-floppy-o right">
+  Save
+</button>
+
+</form>
+{% endblock %}

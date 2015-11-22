@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %n
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+This is reservation: {{ object.title }}
+<br />
+Room: {{ object.room.name }}
+<br />
+Is public: {{ object.is_public }}
+
+{% if request.user == object.creator or request.user.is_superuser %}
+  <a href="{% url "reservation-edit" pk=object.pk %}">edit</a>
+  -
+  <a href="{% url "reservation-delete" pk=object.pk %}">delete</a>
+{% endif %}
+
+
+{% endblock %}

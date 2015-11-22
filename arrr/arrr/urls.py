@@ -9,6 +9,8 @@ from .views import (
     home,
     RoomCreateView, RoomDetailView, RoomListView, RoomEditView, RoomDeleteView,
     UserRegisterView,
+    ReservationCreateView, ReservationDetailView, ReservationListView,
+    ReservationEditView, ReservationDeleteView,
 )
 
 urlpatterns = patterns(
@@ -24,6 +26,18 @@ urlpatterns = patterns(
         RoomEditView.as_view(), name="room-edit"),
     url(r'^room/(?P<slug>[A-Za-z0-9\-]+)/delete/$',
         RoomDeleteView.as_view(), name="room-delete"),
+
+    url(r'^reservation/create/$', ReservationCreateView.as_view(),
+        name="reservation-create"),
+    url(r'^reservation/list/$', ReservationListView.as_view(),
+        name="reservation-list"),
+    url(r'^reservation/(?P<pk>\d+)/$',
+        ReservationDetailView.as_view(), name="reservation-detail"),
+    url(r'^reservation/(?P<pk>\d+)/edit/$',
+        ReservationEditView.as_view(), name="reservation-edit"),
+    url(r'^reservation/(?P<pk>\d+)/delete/$',
+        ReservationDeleteView.as_view(), name="reservation-delete"),
+
     url('^register/$', UserRegisterView.as_view(), name="register"),
     url('^', include('django.contrib.auth.urls')),
 
