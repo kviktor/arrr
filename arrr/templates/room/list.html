@@ -7,7 +7,7 @@
 
 <h2>
   {% if request.user.is_staff %}
-    <a class="button success small ffab-before fa-plus right" href="{% url "room-create" %}" style="margin-top: 8px;">
+    <a class="button success small ffab-before fa-plus right" href="{% url "room.create" %}" style="margin-top: 8px;">
       Add new room
     </a>
   {% endif %}
@@ -32,11 +32,11 @@
           {{ room.description|default:"-" }}
         </td>
         <td>
-          <a class="button tiny secondary ffab-after fa-eye" href="{% url "room-detail" slug=room.slug %}">
+          <a class="button tiny secondary ffab-after fa-eye" href="{% url "room.detail" slug=room.slug %}">
             view
           </a>
           {% if request.user == room.creator or request.user.is_superuser %}
-            <a class="button tiny ffab-after fa-pencil" href="{% url "room-edit" slug=room.slug %}">
+            <a class="button tiny ffab-after fa-pencil" href="{% url "room.edit" slug=room.slug %}">
               edit
             </a>
           {% endif %}

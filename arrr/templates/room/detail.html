@@ -9,9 +9,9 @@ This is room: {{ object.name }}
 Description: {{ object.description|default:"-" }}
 
 {% if request.user == object.creator or request.user.is_superuser %}
-  <a href="{% url "room-edit" slug=object.slug %}">edit</a>
+  <a href="{% url "room.edit" slug=object.slug %}">edit</a>
   -
-  <a href="{% url "room-delete" slug=object.slug %}">delete</a>
+  <a href="{% url "room.delete" slug=object.slug %}">delete</a>
 {% endif %}
 
 

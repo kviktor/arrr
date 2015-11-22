@@ -32,7 +32,7 @@
   <body>
     <div class="off-canvas-wrap move-right" data-offcanvas>
       <div class="inner-wrap">
-        <a class="left-off-canvas-toggle" href="#"><i class="fa fa-list"></i></a>
+        <a class="left-off-canvas-toggle" href="#"><i class="fa fa.list"></i></a>
         <!-- Off Canvas Menu -->
         <aside class="left-off-canvas-menu text-center">
           <div class="icon-bar vertical five-up" style="font-size: 8px; ">
@@ -40,11 +40,11 @@
               <i class="fa fa-home"></i>
               <label>{% trans "Home" %}</label>
             </a>
-            <a class="item" href="{% url "room-list" %}">
+            <a class="item" href="{% url "room.list" %}">
               <i class="fa fa-map-o"></i>
               <label>{% trans "Rooms" %}</label>
             </a>
-            <a class="item" href="{% url "reservation-list" %}">
+            <a class="item" href="{% url "reservation.list" %}">
               <i class="fa fa-calendar-check-o"></i>
               <label>{% trans "Reservations" %}</label>
             </a>

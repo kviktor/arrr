@@ -11,9 +11,9 @@ Room: {{ object.room.name }}
 Is public: {{ object.is_public }}
 
 {% if request.user == object.creator or request.user.is_superuser %}
-  <a href="{% url "reservation-edit" pk=object.pk %}">edit</a>
+  <a href="{% url "reservation.edit" pk=object.pk %}">edit</a>
   -
-  <a href="{% url "reservation-delete" pk=object.pk %}">delete</a>
+  <a href="{% url "reservation.delete" pk=object.pk %}">delete</a>
 {% endif %}
 
 
