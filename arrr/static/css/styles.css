@@ -122,3 +122,8 @@ form .textInput, form small.error, form .textarea, form .checkboxinput {
   bottom: 0px;
   right: 20px;
 }
+
+.col-min {
+  width: 1px;
+  white-space: nowrap;
+}

@@ -110,3 +110,5 @@ CRISPY_TEMPLATE_PACK = 'foundation-5'
 DATETIME_INPUT_FORMATS = (
     "%Y-%m-%d %H:%M",
 )
+
+DATETIME_FORMAT = "Y-m-d H:i"
