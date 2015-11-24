@@ -48,6 +48,8 @@ $(function() {
         center: 'title',
         right: 'timelineDay,agendaWeek,month'
       },
+      height: "auto",
+      lang: "en",
       defaultView: 'timelineDay',
       fixedWeekCount: false,
       allDaySlot: false,
