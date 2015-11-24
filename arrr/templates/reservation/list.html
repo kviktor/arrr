@@ -60,7 +60,7 @@
     Pending reservations
   </h3>
 
-  <ul class="large-block-grid-2">
+  <ul class="large-block-grid-2 small-block-grid-1">
     {% for p in pending %}
       <li class="approve-box" style="position: relative;">
         <form action="{% url "reservation.approve" pk=p.pk %}" method="POST">
