@@ -127,3 +127,48 @@ form .textInput, form small.error, form .textarea, form .checkboxinput {
   width: 1px;
   white-space: nowrap;
 }
+
+/* calendar styles */
+#calendar {
+  max-width: 900px;
+  margin: auto;
+}
+
+#calendar {
+  font-size: 14px;
+}
+
+#calendar h2 {
+  font-size: 1.9rem;
+  margin-top: -6px;
+  color: #444;
+}
+
+#calendar .fc-axis.fc-time {
+  color: #444;
+}
+
+#calendar .fc-cell-text {
+  color: #444;
+}
+
+/* foundation reset */
+#calendar table {
+  background-color: transparent;
+  margin-bottom: 0;
+}
+
+#calendar tr, tr.fc-minor, thead {
+  background: initial;
+}
+
+#calendar table tr:nth-of-type(even) {
+  background: none;
+}
+
+#calendar thead td {
+  font-weight: normal !important;
+}
+#calendar thead {
+  background: none !important;
+}

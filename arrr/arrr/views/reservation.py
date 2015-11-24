@@ -1,9 +1,12 @@
+from hashlib import sha1
+
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.http import JsonResponse
 from django.utils.translation import ugettext as _
 from django.shortcuts import redirect, get_object_or_404
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
@@ -11,7 +14,7 @@ from django.views.generic import (
 
 from braces.views import LoginRequiredMixin
 
-from ..models import Reservation
+from ..models import Reservation, Room
 from ..forms import ReservationForm
 
 
@@ -75,3 +78,25 @@ def approve_reservation(request, pk):
     res.save()
 
     return redirect(reverse("reservation.list"))
+
+
+@require_GET
+def get_calendar_data(request):
+    user = request.user
+
+    reservations = Reservation.objects.filter(status="a")
+    if not user.is_staff:
+        reservations = reservations.filter(is_public=True)
+
+    return JsonResponse({
+        'rooms': [
+            {'id': r.slug, 'title': r.name,
+             'eventColor': r.color}
+            for r in Room.objects.all()
+        ],
+        'reservations': [
+            {'id': r.pk, 'resourceId': r.room.slug, 'title': r.title,
+             'start': r.start, 'end': r.end}
+            for r in reservations
+        ]
+    })

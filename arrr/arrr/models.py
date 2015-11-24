@@ -1,3 +1,5 @@
+from hashlib import sha1
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models import BooleanField, ForeignKey, TextField, CharField
@@ -18,6 +20,10 @@ class Room(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("room.detail", kwargs={'slug': self.slug})
+
+    @property
+    def color(self):
+        return "#" + sha1(self.name.encode("utf-8")).hexdigest()[:6]
 
 
 class Reservation(TimeFramedModel):

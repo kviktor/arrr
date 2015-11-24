@@ -7,7 +7,7 @@ function sideNav() {
   } else {
     $('.off-canvas-wrap').addClass('move-right');
     $('.left-off-canvas-toggle').hide();
-  }  
+  }
 }
 
 
@@ -28,4 +28,36 @@ $(function() {
       return date.valueOf() < now.valueOf() ? 'disabled' : '';
     }
   });
+});
+
+
+$(function() {
+
+  $.ajax({
+    url: "/data/calendar.json",
+    success: function(data) {
+      initCalendar(data.rooms, data.reservations);
+    }
+  });
+
+  function initCalendar(rooms, events) {
+    $("#calendar").fullCalendar({
+      schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'timelineDay,agendaWeek,month'
+      },
+      defaultView: 'timelineDay',
+      fixedWeekCount: false,
+      allDaySlot: false,
+      resourceLabelText: 'Rooms',
+      minTime: "07:00:00",
+      maxTime: "21:00:00",
+      resources: rooms,
+      events: events
+
+    });
+    $("#calendar button").prop("class", "").prop("disabled", false);
+  }
 });
