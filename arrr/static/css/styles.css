@@ -130,7 +130,6 @@ form .textInput, form small.error, form .textarea, form .checkboxinput {
 
 /* calendar styles */
 #calendar {
-  max-width: 950px;
   margin: auto;
 }
 
