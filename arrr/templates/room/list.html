@@ -7,11 +7,11 @@
 
 <h2>
   {% if request.user.is_staff %}
-    <a class="button success small ffab-before fa-plus right" href="{% url "room.create" %}" style="margin-top: 8px;">
+    <a class="button success small ffab-before fa-plus right" href="{% url "room.create" %}" style="margin-top: 3px;">
       Add new room
     </a>
   {% endif %}
-  List of available rooms
+  Rooms
 </h2>
 
 <table id="room-list-table">
