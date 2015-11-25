@@ -11,7 +11,8 @@ from .views import (
     UserRegisterView,
     ReservationCreateView, ReservationDetailView, ReservationListView,
     ReservationEditView, ReservationDeleteView, approve_reservation,
-    get_calendar_data
+    get_calendar_data,
+    UserDetailView,
 )
 
 urlpatterns = patterns(
@@ -40,6 +41,9 @@ urlpatterns = patterns(
         ReservationDeleteView.as_view(), name="reservation.delete"),
     url(r'^reservation/(?P<pk>\d+)/approve/$',
         approve_reservation, name="reservation.approve"),
+
+    url(r'^user/(?P<slug>[\@\.\+\-_a-zA-Z0-9]+)/$',
+        UserDetailView.as_view(), name="user.detail"),
 
     url(r'^data/calendar\.json', get_calendar_data, name="data.calendar"),
 

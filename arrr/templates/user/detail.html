@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %n
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div id="profile-box" style="position: relative;">
+  <img src="//gravatar.com/avatar/{{ avatar_md5 }}?s=160" class="left"/>
+  <div id="user-data">
+    <p>
+      <strong>First name:</strong>
+      {{ user.first_name }}
+    </p>
+    <p>
+      <strong>Last name:</strong>
+      {{ user.last_name }}
+    </p>
+    {% if request.user.is_staff or request.user == user %}
+      <p>
+        <strong>Email:</strong>
+        {{ user.email }}
+      </p>
+      <p>
+        <strong>Last login:</strong> 
+        {{ user.last_login }}
+      </p>
+    {% endif %}
+  </div>
+  <div style="clear: both;"></div>
+</div>
+
+
+<h3>Upcoming reservations by {{ user.first_name }}</h3>
+{% include "_reservations-table.html" with reservations=upcoming_rsvs hide_user=True %}
+
+<h3>Past reservations by {{ user.first_name }}</h3>
+{% include "_reservations-table.html" with reservations=past_rsvs hide_user=True %}
+
+
+{% endblock %}

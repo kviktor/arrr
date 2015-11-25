@@ -1,0 +1,42 @@
+<table class="reservations-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th class="col-min">Start</th>
+      <th class="col-min">End</th>
+      {% if not hide_user %}
+        <th>User</th>
+      {% endif %}
+      <th class="col-min">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in reservations %}
+      <tr>
+        <td>
+          {{ r.title }}
+        </td>
+        <td class="col-min">
+          {{ r.start }}
+        </td>
+        <td class="col-min">
+          {{ r.end }}
+        </td>
+        {% if not hide_user %}
+          <td class="col-min">
+            {{ r.reserver }}
+          </td>
+        {% endif %}
+        <td>
+          <a class="button tiny secondary ffab-after fa-eye" href="{% url "reservation.detail" pk=r.pk %}">
+            view
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No reservations</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>

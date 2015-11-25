@@ -172,3 +172,16 @@ form .textInput, form small.error, form .textarea, form .checkboxinput {
 #calendar thead {
   background: none !important;
 }
+
+#profile-box {
+  position: absolute;
+  margin-bottom: 50px;
+}
+
+#profile-box #user-data {
+  margin-left: 170px;
+}
+
+.reservations-table {
+  width: 100%;
+}
