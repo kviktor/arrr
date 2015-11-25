@@ -184,3 +184,24 @@ form .textInput, form small.error, form .textarea, form .checkboxinput {
 .reservations-table {
   width: 100%;
 }
+
+
+/* tables */
+table.tablesorter thead tr th {
+  background-repeat: no-repeat;
+  background-position: center right;
+  cursor: pointer;
+}
+table.tablesorter .no-sort {
+  cursor: auto;
+}
+table.tablesorter thead tr .headerSortUp:not(.no-sort) {
+    background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown:not(.no-sort) {
+    background-image: url(desc.gif);
+}
+
+table {
+  celpadding: 5;
+}

@@ -15,6 +15,9 @@ class Room(TimeStampedModel):
     description = TextField(blank=True)
     creator = ForeignKey(User, related_name='created_rooms')
 
+    class Meta:
+        ordering = ("name", )
+
     def __str__(self):
         return self.name
 
@@ -39,6 +42,9 @@ class Reservation(TimeFramedModel):
     reserver = ForeignKey(User, related_name='reservations')
     status = CharField(max_length=1, choices=STATUSES, default="p")
     changed_by = ForeignKey(User, null=True)
+
+    class Meta:
+        ordering = ("start", )
 
     def get_absolute_url(self):
         return reverse("reservation.detail", kwargs={'pk': self.pk})

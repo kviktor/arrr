@@ -65,3 +65,14 @@ $(function() {
     $("#calendar button").prop("class", "").prop("disabled", false);
   }
 });
+
+$(function() {
+  var thead = $(".tablesorter thead")
+  var cols = thead.find("th").length  - 1;
+  var start_col = $(".col-start", thead).parent().children().index($(".col-start", thead));
+
+  $(".tablesorter").tablesorter({
+    headers: {cols: false},
+    sortList: [[start_col, 0]]
+  });
+});

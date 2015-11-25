@@ -1,16 +1,16 @@
-<table class="reservations-table">
+<table class="reservations-table tablesorter">
   <thead>
     <tr>
       <th>Title</th>
       {% if not hide_room %}
         <th>Room</th>
       {% endif %}
-      <th class="col-min">Start</th>
+      <th class="col-min col-start">Start</th>
       <th class="col-min">End</th>
       {% if not hide_user %}
         <th class="col-min">User</th>
       {% endif %}
-      <th class="col-min">Action</th>
+      <th class="col-min no-sort">Action</th>
     </tr>
   </thead>
   <tbody>
