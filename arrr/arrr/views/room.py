@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
@@ -7,7 +8,7 @@ from django.views.generic import (
 from braces.views import LoginRequiredMixin
 from braces.views import StaffuserRequiredMixin
 
-from ..models import Room
+from ..models import Room, Reservation
 from ..forms import RoomForm
 
 
@@ -32,6 +33,15 @@ class RoomDetailView(DetailView):
     template_name = "room/detail.html"
     slug_field = "slug"
     slug_url_kwars = "slug"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        filt = {'room': self.object, 'end__gt': timezone.now()}
+        if not self.request.user.is_staff:
+            filt['is_public'] = True
+        print(filt)
+        ctx['upcoming_rsvs'] = Reservation.objects.filter(**filt)
+        return ctx
 
 
 class RoomEditView(LoginRequiredMixin, StaffuserRequiredMixin, UpdateView):

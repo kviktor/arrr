@@ -14,5 +14,7 @@ Description: {{ object.description|default:"-" }}
   <a href="{% url "room.delete" slug=object.slug %}">delete</a>
 {% endif %}
 
+<h3>Reservations</h3>
+{% include "_reservations-table.html" with reservations=upcoming_rsvs hide_room=True %}
 
 {% endblock %}

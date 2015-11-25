@@ -6,55 +6,6 @@
 
 
 
-<h2>
-  {% if request.user.is_staff %}
-    <a class="button success small ffab-before fa-plus right" href="{% url "reservation.create" %}" style="margin-top: 3px;">
-      Create reservation
-    </a>
-  {% endif %}
-  Reservations
-</h2>
-
-<table id="room-list-table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th class="col-min">Start</th>
-      <th class="col-min">End</th>
-      <th>User</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for r in approved %}
-      <tr>
-        <td>
-          {{ r.title }}
-        </td>
-        <td class="col-min">
-          {{ r.start }}
-        </td>
-        <td class="col-min">
-          {{ r.end }}
-        </td>
-        <td class="col-min">
-          {{ r.reserver }}
-        </td>
-        <td>
-          <a class="button tiny secondary ffab-after fa-eye" href="{% url "reservation.detail" pk=r.pk %}">
-            view
-          </a>
-        </td>
-      </tr>
-      {% empty %}
-        <tr>
-          <td colspan="4">No reservations</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-
 {% if request.user.is_staff %}
   <h3>
     Pending reservations
@@ -93,14 +44,18 @@
         <li>No pending reservations</li>
     {% endfor %}
   </ul>
-
-  <h3>
-    Rejected reservations
-  </h3>
 {% endif %}
 
-<h3>
-  Previous reservations
-</h3>
+<h2>
+  {% if request.user.is_staff %}
+    <a class="button success small ffab-before fa-plus right" href="{% url "reservation.create" %}" style="margin-top: 3px;">
+      Create reservation
+    </a>
+  {% endif %}
+  Reservations
+</h2>
+
+
+{% include "_reservations-table.html" with reservations=approved %}
 
 {% endblock %}

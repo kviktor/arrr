@@ -2,10 +2,13 @@
   <thead>
     <tr>
       <th>Title</th>
+      {% if not hide_room %}
+        <th>Room</th>
+      {% endif %}
       <th class="col-min">Start</th>
       <th class="col-min">End</th>
       {% if not hide_user %}
-        <th>User</th>
+        <th class="col-min">User</th>
       {% endif %}
       <th class="col-min">Action</th>
     </tr>
@@ -16,6 +19,13 @@
         <td>
           {{ r.title }}
         </td>
+        {% if not hide_room %}
+          <td class="col-min">
+            <a href="{{ r.room.get_absolute_url }}">
+              {{ r.room.name }}
+            </a>
+          </td>
+        {% endif %}
         <td class="col-min">
           {{ r.start }}
         </td>
@@ -24,7 +34,9 @@
         </td>
         {% if not hide_user %}
           <td class="col-min">
-            {{ r.reserver }}
+            <a href="{% url "user.detail" slug=r.reserver.username %}">
+              {{ r.reserver.get_full_name }}
+            </a>
           </td>
         {% endif %}
         <td>
