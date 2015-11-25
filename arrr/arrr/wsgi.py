@@ -14,7 +14,7 @@ SITE_ROOT = dirname(dirname(abspath(__file__)))
 path.append(SITE_ROOT)
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "arrr.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "arrr.settings.production")
 
 
 from django.core.wsgi import get_wsgi_application
