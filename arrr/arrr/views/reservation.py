@@ -1,5 +1,3 @@
-from hashlib import sha1
-
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
