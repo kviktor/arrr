@@ -33,12 +33,14 @@ $(function() {
 
 $(function() {
 
-  $.ajax({
-    url: "/data/calendar.json",
-    success: function(data) {
-      initCalendar(data.rooms, data.reservations);
-    }
-  });
+  if($("#calendar").length) { 
+    $.ajax({
+      url: "/data/calendar.json",
+      success: function(data) {
+        initCalendar(data.rooms, data.reservations);
+      }
+    });
+  }
 
   function initCalendar(rooms, events) {
     $("#calendar").fullCalendar({
