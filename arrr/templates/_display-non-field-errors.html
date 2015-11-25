@@ -1,0 +1,7 @@
+{% if form.non_field_errors %}
+  <div class="alert-box alert">
+    {% for error in form.non_field_errors %}
+      <div>{{ error|striptags }}</div>
+    {% endfor %}
+  </div>
+{% endif %}

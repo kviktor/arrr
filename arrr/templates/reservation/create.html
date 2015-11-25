@@ -6,6 +6,8 @@
 <form method="POST" action="">
   {% csrf_token %}
 
+  {% include "_display-non-field-errors.html" with form=form %}
+
   {{ form.title|as_crispy_field }}
   {{ form.room|as_crispy_field }}
   {{ form.start|as_crispy_field }}

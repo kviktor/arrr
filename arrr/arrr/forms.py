@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm, EmailField, DateTimeField
+from django.forms import ModelForm, EmailField, DateTimeField, ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Room, Reservation
@@ -27,3 +27,49 @@ class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
         fields = ("title", "room", "start", "end", "is_public", )
+
+    def clean_start(self):
+        start = self.cleaned_data['start']
+        room = self.cleaned_data['room']
+
+        reservation = Reservation.objects.filter(
+            room=room, status="a", start__lte=start, end__gte=start).first()
+        if reservation and self.instance != reservation:
+            raise ValidationError(
+                _("The start date overlaps with an already approved "
+                  "reservation."))
+
+        return start
+
+    def clean_end(self):
+        end = self.cleaned_data['end']
+        room = self.cleaned_data['room']
+
+        reservation = Reservation.objects.filter(
+            room=room, status="a", start__lte=end, end__gte=end).first()
+        if reservation and self.instance != reservation:
+            raise ValidationError(
+                _("The end date overlaps with an already approved "
+                  "reservation."))
+
+        return end
+
+    def clean(self):
+        data = super().clean()
+        start = data.get("start")
+        end = data.get("end")
+        room = data['room']
+
+        if not (start and end):
+            return data
+
+        if end < start:
+            raise ValidationError(
+                _("End date must be later than start date."))
+
+        rsv = Reservation.objects.filter(
+            room=room, status="a", start__lte=start, end__gte=end).first()
+        if rsv and rsv != self.instance:
+            raise ValidationError(_("The given dates overlap with the "
+                                    "timeline of another reservation for "
+                                    "this room."))
