@@ -47,7 +47,7 @@
 {% endif %}
 
 <h2>
-  {% if request.user.is_staff %}
+  {% if request.user.is_authenticated %}
     <a class="button success small ffab-before fa-plus right" href="{% url "reservation.create" %}" style="margin-top: 3px;">
       Create reservation
     </a>
