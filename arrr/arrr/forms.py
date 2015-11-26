@@ -30,7 +30,10 @@ class ReservationForm(ModelForm):
 
     def clean_start(self):
         start = self.cleaned_data['start']
-        room = self.cleaned_data['room']
+        room = self.cleaned_data.get("room")
+
+        if not room:
+            return
 
         reservation = Reservation.objects.filter(
             room=room, status="a", start__lte=start, end__gte=start).first()
@@ -43,7 +46,10 @@ class ReservationForm(ModelForm):
 
     def clean_end(self):
         end = self.cleaned_data['end']
-        room = self.cleaned_data['room']
+        room = self.cleaned_data.get("room")
+
+        if not room:
+            return
 
         reservation = Reservation.objects.filter(
             room=room, status="a", start__lte=end, end__gte=end).first()
@@ -58,9 +64,9 @@ class ReservationForm(ModelForm):
         data = super().clean()
         start = data.get("start")
         end = data.get("end")
-        room = data['room']
+        room = data.get("room")
 
-        if not (start and end):
+        if not (start and end and room):
             return data
 
         if end < start:
