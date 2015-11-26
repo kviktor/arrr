@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+
+class Command:
+    def __call__(self, *args):
+        return self.on_call(*args)
+
+    def __init__(self, desc, on_call):
+        self.desc = desc
+        self.on_call = on_call
+
+
+default_django_settings_module = 'arrr.settings.local'
+
+
+def setup_django(settings_module=default_django_settings_module):
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+    import django
+    django.setup()
+    
+
+def init():
+    setup_django()
+    from django.core.management import call_command
+    call_command('syncdb', interactive=True)
+    
+
+def server(address='[::]:8080'):
+    setup_django()
+    from django.core.management import call_command
+    call_command('runserver', address)
+    
+
+commands = {
+    'init': Command("Initialize arrr.", init),
+    'server': Command("Run server.", server),
+}
+
+
+def print_help():
+    print("Usage: %s <command> <command arguments...>" % os.path.basename(sys.argv[0]))
+    print("Available commands:")
+    for key in commands:
+        print("\t{key}\t--\t{desc}".format(key=key, desc=commands[key].desc))
+
+
+def main():
+    if len(sys.argv) < 2:
+        print_help()
+        return 1
+
+    command = commands.get(sys.argv[1])
+
+    if not command:
+        print("Unknown command: %s" % sys.argv[1])
+        print_help()
+        return -1
+
+    return command(*sys.argv[2:])
+
+
+if __name__ == '__main__':
+    sys.exit(main() or 0)
