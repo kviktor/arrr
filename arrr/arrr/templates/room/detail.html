@@ -4,15 +4,25 @@
 
 {% block content %}
 
-This is room: {{ object.name }}
-<br />
-Description: {{ object.description|default:"-" }}
+<h3>
+  {% if request.user == object.creator or request.user.is_superuser %}
+    <div class="right" style="margin-top: 5px;">
+      <a class="button tiny ffab-before fa-pencil" href="{% url "room.edit" slug=object.slug %}">edit</a>
+      <a class="button tiny alert ffab-before fa-times" href="{% url "room.delete" slug=object.slug %}">delete</a>
+    </div>
+  {% endif %}
+  Detail
+</h3>
 
-{% if request.user == object.creator or request.user.is_superuser %}
-  <a href="{% url "room.edit" slug=object.slug %}">edit</a>
-  -
-  <a href="{% url "room.delete" slug=object.slug %}">delete</a>
-{% endif %}
+<p>
+  <strong>Name:</strong>
+  <br />
+  {{ object.name }}
+</p>
+<p>
+  <strong>Description:</strong> {{ object.description|default:"-"|linebreaks }}
+</p>
+
 
 <h3>Reservations</h3>
 {% include "_reservations-table.html" with reservations=upcoming_rsvs hide_room=True %}
