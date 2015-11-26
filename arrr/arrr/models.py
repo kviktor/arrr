@@ -56,7 +56,7 @@ class Reservation(TimeFramedModel):
 
 def send_notification(sender, instance, created, **kwargs):
     if not created:
-       return
+        return
 
     message = render_to_string("email/reservation-notification.txt", {
         'reservation': instance, 'url': settings.DJANGO_URL.rstrip("/")
