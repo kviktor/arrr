@@ -95,11 +95,11 @@ MEDIA_URL = '/media/'
 # Additional locations of static files
 
 STATICFILES_DIRS = (
-    join(SITE_ROOT, 'static'),
+    join(SITE_ROOT, 'arrr', 'static'),
 )
 
 TEMPLATE_DIRS = (
-    join(SITE_ROOT, 'templates'),
+    join(SITE_ROOT, 'arrr', 'templates'),
 )
 
 # Add 'foundation-5' layout pack
