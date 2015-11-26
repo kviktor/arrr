@@ -94,7 +94,7 @@ def get_calendar_data(request):
         ],
         'reservations': [
             {'id': r.pk, 'resourceId': r.room.slug, 'title': r.title,
-             'start': r.start, 'end': r.end}
+             'start': r.start, 'end': r.end, 'url': r.get_absolute_url()}
             for r in reservations
         ]
     })
