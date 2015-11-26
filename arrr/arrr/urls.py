@@ -5,14 +5,16 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
+from arrr.settings.base import get_env_variable
+
+
 from .views import (
     home,
     RoomCreateView, RoomDetailView, RoomListView, RoomEditView, RoomDeleteView,
-    UserRegisterView,
+    UserRegisterView, UserDetailView, arrr_login,
     ReservationCreateView, ReservationDetailView, ReservationListView,
     ReservationEditView, ReservationDeleteView, approve_reservation,
     get_calendar_data,
-    UserDetailView,
 )
 
 urlpatterns = patterns(
@@ -48,6 +50,13 @@ urlpatterns = patterns(
     url(r'^data/calendar\.json', get_calendar_data, name="data.calendar"),
 
     url('^register/$', UserRegisterView.as_view(), name="register"),
+    url('^login/$', arrr_login, name="login"),
     url('^', include('django.contrib.auth.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if get_env_variable('DJANGO_SAML', 'FALSE') == 'TRUE':
+    urlpatterns += patterns(
+        '',
+        (r'^saml2/', include('djangosaml2.urls')),
+    )

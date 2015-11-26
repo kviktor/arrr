@@ -20,19 +20,19 @@ def setup_django(settings_module=default_django_settings_module):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
     import django
     django.setup()
-    
+
 
 def init():
     setup_django()
     from django.core.management import call_command
     call_command('syncdb', interactive=True)
-    
 
-def server(address='[::]:8080'):
+
+def server(address='[::]:8085'):
     setup_django()
     from django.core.management import call_command
     call_command('runserver', address)
-    
+
 
 commands = {
     'init': Command("Initialize arrr.", init),

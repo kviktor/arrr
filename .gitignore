@@ -3,3 +3,7 @@
 *.mo
 *.db
 *.swp
+attribute-maps
+*.key
+*.pem
+*.xml

@@ -1,8 +1,9 @@
 # flake8: noqa
 
+from json import loads
 from sys import path
 from os import environ
-from os.path import join, abspath, dirname
+from os.path import join, abspath, dirname, isfile, basename
 
 
 # this is okay
@@ -24,6 +25,11 @@ def get_env_variable(var_name, default=None):
 BASE_DIR = dirname(dirname(abspath(__file__)))
 
 SITE_ROOT = dirname(BASE_DIR)
+
+SITE_NAME = basename(BASE_DIR)
+
+DJANGO_URL = get_env_variable("DJANGO_URL", "http://localhost:8085/")
+
 
 path.append(BASE_DIR)
 
@@ -131,4 +137,74 @@ DATETIME_INPUT_FORMATS = (
 
 DATETIME_FORMAT = "Y-m-d H:i"
 
-DJANGO_URL = get_env_variable("DJANGO_URL", "http://localhost:8080")
+LOGIN_REDIRECT_URL = "/"
+
+
+# SAML2
+if get_env_variable('DJANGO_SAML', 'FALSE') == 'TRUE':
+    from shutil import which
+    from saml2 import BINDING_HTTP_POST, BINDING_HTTP_REDIRECT
+
+    INSTALLED_APPS += (
+        "djangosaml2",
+    )
+    AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+        'djangosaml2.backends.Saml2Backend',
+    )
+
+    remote_metadata = join(SITE_ROOT, 'remote_metadata.xml')
+    if not isfile(remote_metadata):
+        raise ImproperlyConfigured('Download SAML2 metadata to %s' %
+                                   remote_metadata)
+    required_attrs = loads(get_env_variable('DJANGO_SAML_REQUIRED',
+                                            '["uid"]'))
+    optional_attrs = loads(get_env_variable('DJANGO_SAML_OPTIONAL',
+                                            '["mail", "cn", "sn"]'))
+
+    SAML_CONFIG = {
+        'xmlsec_binary': which('xmlsec1'),
+        'entityid': DJANGO_URL + 'saml2/metadata',
+        'attribute_map_dir': join(SITE_ROOT, 'attribute-maps'),
+        'service': {
+            'sp': {
+                'name': SITE_NAME,
+                'endpoints': {
+                    'assertion_consumer_service': [
+                        (DJANGO_URL + 'saml2/acs/', BINDING_HTTP_POST),
+                    ],
+                    'single_logout_service': [
+                        (DJANGO_URL + 'saml2/ls/', BINDING_HTTP_REDIRECT),
+                    ],
+                },
+                'required_attributes': required_attrs,
+                'optional_attributes': optional_attrs,
+            },
+        },
+        'metadata': {'local': [remote_metadata], },
+        'key_file': join(SITE_ROOT, 'samlcert.key'),  # private part
+        'cert_file': join(SITE_ROOT, 'samlcert.pem'),  # public part
+        'encryption_keypairs': [
+            {
+                'key_file': join(SITE_ROOT, 'samlcert.key'),
+                'cert_file': join(SITE_ROOT, 'samlcert.pem'),
+            }
+        ],
+        'encryption_keypairs': [
+            {
+                'key_file': join(SITE_ROOT, 'samlcert.key'),
+                'cert_file': join(SITE_ROOT, 'samlcert.pem'),
+            }
+        ]
+    }
+
+    try:
+        SAML_CONFIG += loads(get_env_variable('DJANGO_SAML_SETTINGS'))
+    except ImproperlyConfigured:
+        pass
+
+    SAML_CREATE_UNKNOWN_USER = True
+    SAML_ATTRIBUTE_MAPPING = loads(get_env_variable(
+        'DJANGO_SAML_ATTRIBUTE_MAPPING',
+        '{"mail": ["email"], "sn": ["last_name"], '
+        '"uid": ["username"], "cn": ["first_name"]}'))

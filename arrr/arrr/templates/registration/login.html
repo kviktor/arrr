@@ -13,15 +13,20 @@
   {% endif %}
   <form method="POST" action="">
     {% csrf_token %}
-    <input type="hidden" name="next" value="/" />
 
     {{ form.username|as_crispy_field }}
     {{ form.password|as_crispy_field }}
+    {% if saml2 %}
+      <a href="{% url "saml2_login" %}" class="button sucess small ffab-before fa-user">
+        SSO
+      </a>
+    {% endif %}
     <button type="submit" class="button success small right ffab-before fa-user">
       {% trans "Login" %}
     </button>
-    <p style="font-size: 0.95rem; margin-top: 25px;">
-      <a href="{% url "register" %}">{% trans "Register a new account." %}</a>
+    <p style="clear: both; font-size: 0.95rem; margin-top: 5px;">
+      You have no account?
+      <a href="{% url "register" %}">Register</a> a new one!
     </p>
   </form>
   <div style="clear: both;"></div>

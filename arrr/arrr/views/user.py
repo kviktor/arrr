@@ -1,14 +1,29 @@
 from hashlib import md5
 
+from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.views import login as login_view
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import redirect
 from django.views.generic import CreateView, DetailView
+
 
 from ..forms import UserRegisterForm
 from ..forms import Reservation
+
+
+def arrr_login(request):
+    if request.user.is_authenticated():
+        return redirect("/")
+
+    extra_context = {
+        'saml2': hasattr(settings, "SAML_CONFIG"),
+    }
+    response = login_view(request, extra_context=extra_context)
+    return response
 
 
 class UserRegisterView(SuccessMessageMixin, CreateView):
