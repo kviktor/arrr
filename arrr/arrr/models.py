@@ -1,9 +1,13 @@
 from hashlib import sha1
 
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db.models import BooleanField, ForeignKey, TextField, CharField
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
+from django.template.loader import render_to_string
 
 from autoslug import AutoSlugField
 from model_utils.models import TimeFramedModel, TimeStampedModel
@@ -48,3 +52,18 @@ class Reservation(TimeFramedModel):
 
     def get_absolute_url(self):
         return reverse("reservation.detail", kwargs={'pk': self.pk})
+
+
+def send_notification(sender, instance, created, **kwargs):
+    if not created:
+       return
+
+    message = render_to_string("email/reservation-notification.txt", {
+        'reservation': instance, 'url': settings.DJANGO_URL.rstrip("/")
+    })
+    emails = User.objects.filter(is_staff=True).values_list("email", flat=True)
+
+    send_mail("New reservation", message, settings.DEFAULT_FROM_EMAIL,
+              emails, fail_silently=False)
+
+post_save.connect(send_notification, sender=Reservation)

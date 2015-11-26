@@ -1,0 +1,9 @@
+A new reservation was created by {{ reservation.reserver.get_full_name }} ({{ reservation.reserver.email }})
+
+Title: {{ reservation.title }}
+Room: {{ reservation.room.name }}
+Start: {{ reservation.start }}
+End: {{ reservation.end }}
+Public: {% if reservation.is_public %}yes{% else %}no{% endif %}
+
+To approve the reservation go to the following link: {{ url }}{% url "reservation.list" %}

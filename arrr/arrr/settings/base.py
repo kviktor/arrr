@@ -1,7 +1,25 @@
 # flake8: noqa
 
 from sys import path
+from os import environ
 from os.path import join, abspath, dirname
+
+
+# this is okay
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_variable(var_name, default=None):
+    """ Get the environment variable or return exception/default """
+    try:
+        return environ[var_name]
+    except KeyError:
+        if default is None:
+            error_msg = "Set the %s environment variable" % var_name
+            raise ImproperlyConfigured(error_msg)
+        else:
+            return default
+
 
 BASE_DIR = dirname(dirname(abspath(__file__)))
 
@@ -112,3 +130,5 @@ DATETIME_INPUT_FORMATS = (
 )
 
 DATETIME_FORMAT = "Y-m-d H:i"
+
+DJANGO_URL = get_env_variable("DJANGO_URL", "http://localhost:8080")
