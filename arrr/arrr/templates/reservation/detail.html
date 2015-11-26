@@ -4,17 +4,43 @@
 
 {% block content %}
 
-This is reservation: {{ object.title }}
-<br />
-Room: {{ object.room.name }}
-<br />
-Is public: {{ object.is_public }}
-
+<h3>Reservation detail</h3>
 {% if request.user == object.creator or request.user.is_superuser %}
-  <a href="{% url "reservation.edit" pk=object.pk %}">edit</a>
-  -
-  <a href="{% url "reservation.delete" pk=object.pk %}">delete</a>
+  <div class="right" style="margin-top: 5px;">
+    <a class="button tiny ffab-before fa-pencil" href="{% url "reservation.edit" pk=object.pk %}">edit</a>
+    <a class="button tiny alert ffab-before fa-times" href="{% url "reservation.delete" pk=object.pk %}">delete</a>
+  </div>
 {% endif %}
 
+<p>
+  <strong>Title:</strong>
+  {{ object.title }}
+</p>
+<p>
+  <strong>Room:</strong>
+  <a href="{% url "room.detail" slug=object.room.slug %}">{{ object.room.name }}</a>
+</p>
+<p>
+  <strong>Start:</strong>
+  {{ object.start }}
+</p>
+<p>
+  <strong>End:</strong>
+  {{ object.end }}
+</p>
+<p>
+  <strong>Public:</strong>
+  <i class="fa fa-{% if object.is_public %}check{% else %}times{% endif %}"></i>
+</p>
+<p>
+  <strong>User:</strong>
+  <a href="{% url "user.detail" slug=object.reserver.username %}">
+    {{ object.reserver.get_full_name}}
+  </a>
+</p>
+<p>
+  <strong>Status:</strong>
+  {{ object.get_status_display|title }}
+</p>
 
 {% endblock %}
