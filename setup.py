@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 from os import chdir, getcwd, walk
 from os.path import join
 from setuptools import find_packages, setup
 
 
-requirements = [line.strip() for line in open("requirements/base.txt", "r")]
+requirements = [line.strip() for line in open('requirements/base.txt', 'r')]
 
 package_root = join('arrr', 'arrr')
 
@@ -24,7 +23,7 @@ setup(
     # package metadata
     name="arrr",
     version="1.0.0",
-    author=u"Dudás Ádám, Kálmán Viktor",
+    author="Dudás Ádám, Kálmán Viktor",
     author_email="sir.dudas.adam@gmail.com, viktorvector@gmail.com",
     description="Reserving rooms like a sane person.",
     long_description="TODO: read from README",
