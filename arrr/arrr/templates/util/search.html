@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="GET" action="">
+  <div class="row collapse">
+    <div class="small-10 columns">
+      <input type="text" name="keyword"placeholder="Search for rooms, reservations and users" value="{{ request.GET.keyword }}">
+    </div>
+    <div class="small-2 columns">
+      <button type="submit" class="button postfix">Search</button>
+    </div>
+  </div>
+</form>
+
+{% if request.GET.keyword and not results.Room and not results.Reservation and not results.User %}
+<div class="alert-box default">
+  The search didn't find anything :(
+</div>
+{% endif %}
+
+{% if results.Room %}
+  <h3>Rooms</h3>
+  {% include "_rooms-table.html" with rooms=results.Room condensed=True %} 
+{% endif %}
+
+
+{% if results.Reservation %}
+  <h3>Reservations</h3>
+  {% include "_reservations-table.html" with reservations=results.Reservation condensed=True %}
+{% endif %}
+
+
+{% if results.User %}
+  <h3>Users</h3>
+  <table class="tablesorter condensed" style="width: 100%;">
+    <thead>
+      <tr>
+        {% if request.user.is_staff %}
+          <th>Email</th>
+        {% endif %}
+        <th>First name</th>
+        <th>Last name</th>
+        <th class="no-sort">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in results.User %}
+        <tr>
+          {% if request.user.is_staff %}
+            <td>{{ u.email }}</td>
+          {% endif %}
+          <td>{{ u.first_name }}</td>
+          <td>{{ u.last_name }}</td>
+          <td class="col-min">
+            <a class="button tiny ffab-before fa-eye" href="{% url "user.detail" slug=u.username %}">view</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<table id="room-list-table" class="tablesorter {% if condensed %}condensed{% endif %}">
+  <thead>
+    <tr>
+      <th class="col-start" style="min-width: 180px;">Name</th>
+      <th>Description</th>
+      <th class="no-sort">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for room in rooms %}
+      <tr>
+        <td>
+          {{ room.name }}
+        </td>
+        <td>
+          {{ room.description|default:"-"|truncatewords:50 }}
+        </td>
+        <td>
+          <a class="button tiny secondary ffab-after fa-eye" href="{% url "room.detail" slug=room.slug %}">
+            view
+          </a>
+          {% if request.user == room.creator or request.user.is_superuser %}
+            <a class="button tiny ffab-after fa-pencil" href="{% url "room.edit" slug=room.slug %}">
+              edit
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td class="text-center" colspan="3">
+          No rooms
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

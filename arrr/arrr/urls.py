@@ -15,6 +15,7 @@ from .views import (
     ReservationCreateView, ReservationDetailView, ReservationListView,
     ReservationEditView, ReservationDeleteView, approve_reservation,
     get_calendar_data,
+    SearchView
 )
 
 urlpatterns = patterns(
@@ -48,6 +49,8 @@ urlpatterns = patterns(
         UserDetailView.as_view(), name="user.detail"),
 
     url(r'^data/calendar\.json', get_calendar_data, name="data.calendar"),
+
+    url(r'^search/$', SearchView.as_view(), name="search"),
 
     url('^register/$', UserRegisterView.as_view(), name="register"),
     url('^login/$', arrr_login, name="login"),

@@ -50,6 +50,9 @@ class Reservation(TimeFramedModel):
     class Meta:
         ordering = ("start", )
 
+    def __str__(self):
+        return self.title
+
     def get_absolute_url(self):
         return reverse("reservation.detail", kwargs={'pk': self.pk})
 
