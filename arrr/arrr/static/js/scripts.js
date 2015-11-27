@@ -59,10 +59,13 @@ $(function() {
       minTime: "07:00:00",
       maxTime: "21:00:00",
       resources: rooms,
-      events: events
+      events: events,
+      eventAfterAllRender: function(view) {
+        $("#calendar h3").remove();
+        $("#calendar button").prop("class", "").prop("disabled", false);
+      }
 
     });
-    $("#calendar button").prop("class", "").prop("disabled", false);
   }
 });
 
@@ -74,6 +77,6 @@ $(function() {
 
   $(".tablesorter").tablesorter({
     headers: {cols: false},
-    sortList: [[start_col, 0]]
+    sortList: [[start_col, 0]],
   });
 });
