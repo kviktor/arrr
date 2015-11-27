@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import JsonResponse
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.shortcuts import redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_GET
@@ -23,8 +24,11 @@ class ReservationListView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         reservations = Reservation.objects.all()
-        ctx['approved'] = reservations.filter(status="a")
+        now = timezone.now()
+        ctx['future'] = reservations.filter(status="a", end__gt=now)
+        ctx['past'] = reservations.filter(status="a", end__lt=now)
         ctx['pending'] = reservations.filter(status="p")
+        ctx['rejected'] = reservations.filter(status="r")
         return ctx
 
 

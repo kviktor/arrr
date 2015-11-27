@@ -1,4 +1,4 @@
-<table class="reservations-table tablesorter">
+<table class="reservations-table tablesorter {% if condensed %}condensed{% endif %}">
   <thead>
     <tr>
       <th>Title</th>
@@ -47,7 +47,7 @@
       </tr>
       {% empty %}
         <tr>
-          <td colspan="5">No reservations</td>
+          <td class="text-center" colspan="6">No reservations</td>
         </tr>
     {% endfor %}
   </tbody>

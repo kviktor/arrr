@@ -202,6 +202,18 @@ table.tablesorter thead tr .headerSortDown:not(.no-sort) {
     background-image: url(desc.gif);
 }
 
-table {
-  celpadding: 5;
+.tablesorter {
+  margin-bottom: 50px;
+}
+
+.tablesorter td {
+  padding: 15px;
+}
+
+.tablesorter.condensed td {
+  padding: 5px;
+}
+
+.tablesorter .button {
+  margin: 0;
 }

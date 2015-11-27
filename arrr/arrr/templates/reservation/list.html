@@ -52,10 +52,21 @@
       Create reservation
     </a>
   {% endif %}
-  Reservations
+  Future reservations
 </h2>
 
+{% include "_reservations-table.html" with reservations=future %}
 
-{% include "_reservations-table.html" with reservations=approved %}
+
+<h2>Past reservations</h2>
+{% include "_reservations-table.html" with reservations=past %}
+
+
+{% if request.user.is_staff %}
+  <h2>Rejected reservations</h2>
+  {% include "_reservations-table.html" with reservations=rejected condensed=True %}
+{% endif%}
+
+
 
 {% endblock %}
