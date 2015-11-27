@@ -217,3 +217,11 @@ table.tablesorter thead tr .headerSortDown:not(.no-sort) {
 .tablesorter .button {
   margin: 0;
 }
+
+#base-delete {
+  max-width: 450px;
+  background: #eee;
+  margin: auto;
+  padding: 25px;
+  text-align: right;
+}

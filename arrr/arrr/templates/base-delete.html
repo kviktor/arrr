@@ -2,8 +2,12 @@
 
 
 {% block content %}
-  <form action="" method="post">{% csrf_token %}
-      <p>Are you sure you want to delete "{{ object }}"?</p>
-      <input type="submit" value="Confirm" />
-  </form>
+  <div id="base-delete">
+    <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <button type="submit" value="Confirm" class="button alert tiny ffab-before fa-times">
+          Confirm
+        </button>
+    </form>
+  </div>
 {% endblock %}
